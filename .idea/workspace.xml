@@ -8,13 +8,23 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" name="Default" comment="" />
+    <list default="true" id="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/logging/Logging.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/logging/Logging.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/Main.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/plugin/PluginLoader.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/plugin/PluginLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java" afterPath="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/languages/pt_BR.lang" afterPath="$PROJECT_DIR$/languages/pt_BR.lang" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="PircBotX.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/PircBotX.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367294090911" ignored="false" />
     <file path="/a.xml" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367282291917" ignored="false" />
     <file path="/SQLiteManager.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367368130676" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367283144597" ignored="false" />
     <file path="/Logging.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367366532382" ignored="false" />
     <file path="/LanguageManager.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367372239183" ignored="false" />
     <file path="/pt_BR.lang" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367372036829" ignored="false" />
@@ -27,8 +37,8 @@
     <file path="/Google.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367372496122" ignored="false" />
     <file path="/URL.java" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367372901510" ignored="false" />
     <file path="/Dummy.txt" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367376710932" ignored="false" />
-    <file path="/.gitignore" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367376678797" ignored="false" />
-    <file path="/README" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367376656563" ignored="false" />
+    <file path="/.gitignore" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367377239353" ignored="false" />
+    <file path="/README" changelist="8a8e3f17-89be-4ab8-8fa2-a4ae9a23be1e" time="1367377288460" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,12 +104,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="8" selection-start="2785" selection-end="2785" vertical-scroll-proportion="0.5863268">
+            <state line="64" column="76" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#1492#1522#0" expanded="true" />
+                <element signature="e#1489#1519#0" expanded="true" />
                 <element signature="method#executeStart#0;class#Main#0" expanded="false" />
                 <element signature="method#doSQLite#0;class#Main#0" expanded="false" />
                 <element signature="method#doPlugins#0;class#Main#0" expanded="false" />
@@ -109,11 +119,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="README" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="5" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0">
+            <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pt_BR.lang" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/languages/pt_BR.lang">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="8" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Logging.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/logging/Logging.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#1943#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PluginLoader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/plugin/PluginLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="13" selection-start="986" selection-end="986" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="method#getPlugins#0;class#PluginLoader#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,7 +162,7 @@
       <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="8" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
+            <state line="5" column="34" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,8 +171,9 @@
       <file leaf-file-name="LanguageManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1888" selection-end="1888" vertical-scroll-proportion="0.0">
+            <state line="33" column="16" selection-start="1192" selection-end="1192" vertical-scroll-proportion="0.0">
               <folding>
+                <element signature="e#0#2227#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -150,19 +192,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pt_BR.lang" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugins_src/URL/languages/pt_BR.lang">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SQLiteConfigurator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="73" selection-start="3996" selection-end="4004" vertical-scroll-proportion="0.0">
+            <state line="113" column="73" selection-start="3993" selection-end="4001" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="method#Welcome#0;class#SQLiteConfigurator#0" expanded="false" />
                 <element signature="method#Step1#0;class#SQLiteConfigurator#0" expanded="false" />
@@ -178,24 +211,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="URL.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugins_src/URL/src/com/jomp16/url/URL.java">
+      <file leaf-file-name="SQLiteManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="54" selection-start="3643" selection-end="3643" vertical-scroll-proportion="0.0">
+            <state line="25" column="13" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#4233#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="class#DefaultTrustManager#0;class#URL#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pt_BR.lang" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugins_src/Google/languages/pt_BR.lang">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="955" selection-end="955" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -219,22 +241,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java" />
-        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java" />
-        <option value="$PROJECT_DIR$/languages/pt_BR.lang" />
-        <option value="$PROJECT_DIR$/plugins_src/Google/plugin.properties" />
-        <option value="$PROJECT_DIR$/plugins_src/Google/src/com/jomp16/google/Google_old.java" />
         <option value="$PROJECT_DIR$/plugins_src/Google/src/com/jomp16/google/GoogleSearch.java" />
         <option value="$PROJECT_DIR$/plugins_src/URL/plugin.properties" />
         <option value="$PROJECT_DIR$/plugins_src/URL/src/com/jomp16/url/URL_old.java" />
         <option value="$PROJECT_DIR$/plugins_src/Google/languages/pt_BR.lang" />
-        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java" />
         <option value="$PROJECT_DIR$/plugins_src/Google/src/com/jomp16/google/Google.java" />
         <option value="$PROJECT_DIR$/plugins_src/URL/languages/pt_BR.lang" />
         <option value="$PROJECT_DIR$/plugins_src/URL/src/com/jomp16/url/URL.java" />
+        <option value="$PROJECT_DIR$/languages/pt_BR.lang" />
+        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java" />
+        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/logging/Logging.java" />
+        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/plugin/PluginLoader.java" />
+        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java" />
+        <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java" />
         <option value="$PROJECT_DIR$/src/com/jomp16/pircbotx/Main.java" />
-        <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README" />
       </list>
     </option>
   </component>
@@ -286,38 +308,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PircBotX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PircBotX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PircBotX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PircBotX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PircBotX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pircbotx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -472,7 +462,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1922" height="1054" extended-state="6" />
+    <frame x="-1" y="27" width="1922" height="1054" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -563,34 +553,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/languages/pt_BR.lang">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1940" selection-end="1940" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins_src/Google/src/com/jomp16/google/GoogleSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="699" selection-end="699" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins_src/URL/src/com/jomp16/url/URL_old.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="687" selection-end="687" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugins_src/URL/plugin.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="42" selection-start="697" selection-end="697" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugins_src/Google/plugin.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="1" selection-start="678" selection-end="679" vertical-scroll-proportion="0.0">
@@ -621,15 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1888" selection-end="1888" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugins_src/URL/src/com/jomp16/url/URL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="54" selection-start="3643" selection-end="3643" vertical-scroll-proportion="0.0">
@@ -637,23 +590,6 @@
             <element signature="e#0#4233#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="class#DefaultTrustManager#0;class#URL#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="73" selection-start="3996" selection-end="4004" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#Welcome#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step1#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step2#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step3#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step4#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step5#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step6#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Step7#0;class#SQLiteConfigurator#0" expanded="false" />
-            <element signature="method#Finished#0;class#SQLiteConfigurator#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -675,30 +611,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README">
+    <entry file="file://$PROJECT_DIR$/languages/pt_BR.lang">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="5" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0">
+        <state line="15" column="8" selection-start="559" selection-end="559" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/language/LanguageManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="8" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="33" column="16" selection-start="1192" selection-end="1192" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2227#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/logging/Logging.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#1943#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/plugin/PluginLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="13" selection-start="986" selection-end="986" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#getPlugins#0;class#PluginLoader#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteConfigurator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="73" selection-start="3993" selection-end="4001" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="method#Welcome#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step1#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step2#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step3#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step4#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step5#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step6#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Step7#0;class#SQLiteConfigurator#0" expanded="false" />
+            <element signature="method#Finished#0;class#SQLiteConfigurator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/sqlite/SQLiteManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="801" selection-end="801" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/jomp16/pircbotx/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="8" selection-start="2785" selection-end="2785" vertical-scroll-proportion="0.5863268">
+        <state line="64" column="76" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1492#1522#0" expanded="true" />
+            <element signature="e#1489#1519#0" expanded="true" />
             <element signature="method#executeStart#0;class#Main#0" expanded="false" />
             <element signature="method#doSQLite#0;class#Main#0" expanded="false" />
             <element signature="method#doPlugins#0;class#Main#0" expanded="false" />
             <element signature="method#doPircBotX#0;class#Main#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="34" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
