@@ -43,14 +43,14 @@ public class Google extends ListenerAdapter {
     public Google() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted), true);
+        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted));
     }
 
     @Override
     public void onMessage(MessageEvent event) throws IOException {
         if (event.getMessage().startsWith(prefix + "google")) {
-            if (event.getMessage().length() >= 11) {
-                String raw1 = event.getMessage().substring(10);
+            if (event.getMessage().length() >= 10) {
+                String raw1 = event.getMessage().substring(9);
                 if (raw1.length() >= 1) {
                     int index1 = raw1.indexOf("\"");
                     String term = raw1.substring(0, index1);

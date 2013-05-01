@@ -95,7 +95,7 @@ public class Main {
             inputStream = new FileInputStream(new File(System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted));
         }
 
-        languageManager = new LanguageManager(inputStream, jar);
+        languageManager = new LanguageManager(inputStream);
         logging = new Logging();
 
         logging.writeLine("Welcome");

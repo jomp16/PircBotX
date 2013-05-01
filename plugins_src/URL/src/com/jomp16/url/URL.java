@@ -44,7 +44,7 @@ public class URL extends ListenerAdapter {
     public URL() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted), true);
+        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted));
     }
 
     @Override
