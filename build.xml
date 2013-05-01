@@ -154,7 +154,7 @@
 
     <target name="compile.module.pircbotx.production" description="Compile module PircBotX; production classes">
         <mkdir dir="${pircbotx.output.dir}"/>
-        <javac destdir="${pircbotx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${pircbotx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.pircbotx}"/>
             <bootclasspath refid="pircbotx.module.bootclasspath"/>
@@ -241,7 +241,7 @@
     <target name="compile.module.google.production" depends="compile.module.pircbotx"
             description="Compile module Google; production classes">
         <mkdir dir="${google.output.dir}"/>
-        <javac destdir="${google.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${google.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.google}"/>
             <bootclasspath refid="google.module.bootclasspath"/>
@@ -328,7 +328,7 @@
     <target name="compile.module.url.production" depends="compile.module.pircbotx"
             description="Compile module URL; production classes">
         <mkdir dir="${url.output.dir}"/>
-        <javac destdir="${url.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${url.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.url}"/>
             <bootclasspath refid="url.module.bootclasspath"/>

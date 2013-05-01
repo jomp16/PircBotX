@@ -83,17 +83,28 @@ public class Main {
             if (raw.startsWith("say")) {
                 // TODO
             }
+            if (raw.startsWith("ops")) {
+                for (String OP : OPs) {
+                    System.out.println(OP);
+                }
+            }
         }
     }
 
     private static void executeStart() throws IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IrcException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-
-        String jarPath = URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-        URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
+        boolean jar = Main.class.getResource("Main.class").toString().startsWith("jar:");
+        URL url;
+        if (jar) {
+            String jarPath = URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+            url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
+            //languageManager = new LanguageManager(url);
+        } else {
+            url = new URL("file:" + System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted);
+            //languageManager = new LanguageManager(new URL(fileNameFormatted));
+        }
         languageManager = new LanguageManager(url);
-
         logging = new Logging();
 
         logging.writeLine("Welcome");
@@ -146,7 +157,7 @@ public class Main {
                 .setLogin(sqLiteManager.getData("SELECT * FROM bot_config", "Indent"))
                 .setServer(sqLiteManager.getData("SELECT * FROM bot_config", "IRCServer"), 6667)
                 .setListenerManager(manager)
-                .setShutdownHookEnabled(true)
+                //.setShutdownHookEnabled(true)
                 .buildConfiguration());
         botX.connect();
 
