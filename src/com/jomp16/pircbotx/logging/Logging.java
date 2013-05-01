@@ -58,7 +58,7 @@ public class Logging {
     }
 
     public void writeUsedRAM() {
-        newLine();
+        writeLine("UsedRam", humanReadableByteCount(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), false));
     }
 
     public Object getInputString() {

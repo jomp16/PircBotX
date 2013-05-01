@@ -33,6 +33,8 @@ LoadedBot=Bot carregado!
 ConfirmChar=s
 CancelChar=n
 
+UsedRam=Memória usada: %s
+
 #########################
 ## SQLite configurator ##
 #########################
