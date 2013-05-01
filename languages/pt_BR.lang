@@ -1,0 +1,59 @@
+#
+# Copyright (C) 2013 jomp16
+#
+# This file is part of Main.
+#
+# Main is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Main is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Main.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+##############
+## Main ##
+##############
+
+Welcome=Bem vindo ao PircBotX por jomp16!
+LoadingSQLiteDatabase=Carregando o banco de dados SQLite
+SQLiteLoaded=O banco de dados SQLite foi carregado!
+SQLiteNotFound=O banco de dados SQLite não foi encontrado! Abrindo o assistente de configuração para você criar uma!
+LoadingPlugins=Carregando plugins
+LoadedPlugins=Carregado %d plugins!
+LoadingBot=Carregando bot
+LoadedBot=Bot carregado!
+
+ConfirmChar=s
+CancelChar=n
+
+#########################
+## SQLite configurator ##
+#########################
+
+SQLiteWelcome=Bem vindo ao assistente de configuração do SQLite do PircBotX!
+SQLiteStep1=Qual é o nome do seu bot?
+SQLiteStep2=Qual o nome real do seu bot?
+SQLiteStep3=Qual vai ser o identify do seu bot? (~"indent"@hostname)
+SQLiteStep4-1=Quem vai ser o OP desse bot? (Não use o nickname, e sim o indent do usuário (algo como nickname@unaffiliated/nickname)
+SQLiteStep4-2=Gostaria de adicionar mais um OP desse bot? [s/N]
+SQLiteStep5=Qual será o prefixo do comando para o bot fazer o listen? (como !)
+SQLiteStep6=Qual será o host que o bot conectará?
+SQLiteStep7-1=Quais são os canais que você quer que o bot faça o join automaticamente? (Sintaxe: #canal)
+SQLiteStep7-2=Gostaria de adicionar mais um canal para entrar? [s/N]
+
+# I need this?
+SQLiteStep6-Google=Você gostaria de ativar o plugin "Google"? [S/n]
+SQLiteStep6-URL=Você gostaria de ativar o plugin "URL"? [S/n]
+SQLiteStep6-Join=Você gostaria de ativar o plugin "join"? [S/n]
+SQLiteStep6-Part=Você gostaria de ativar o plugin "part"? [S/n]
+SQLiteStep6-JoinOP=Você gostaria de ativar o plugin "JoinOP"? (O bot dá status de OP do canal para um OP do bot se tiver permissões) [S/n]
+SQLiteStep6-JoinVoice=Você gostaria de ativar o plugin "JoinVoice"? (O bot dará status de voice do canal para qualquer um que entrar se o bot tiver permissões para isso) [S/n]
+
+SQLiteFinished=Parabéns!
