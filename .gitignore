@@ -1,1 +1,4 @@
 database.db
+src/META-INF/
+*.iml
+plugins/

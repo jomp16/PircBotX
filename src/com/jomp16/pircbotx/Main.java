@@ -62,7 +62,6 @@ public class Main {
     private static ListenerManager<PircBotX> manager = new ThreadedListenerManager<>();
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IOException, IrcException, InterruptedException {
-        // Theses comments is a note
         /*plugins = new PluginLoader().getPlugins();
         for (Class plugin : plugins) {
             Method method = plugin.getDeclaredMethod("getHelp");
@@ -75,7 +74,6 @@ public class Main {
         /*for (Class class1 : classes) {
             class1.newInstance();
         }*/
-        // end
 
         executeStart();
         while (true) {
