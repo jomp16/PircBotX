@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="pircbotx" default="all">
-
-    <!-- Compiler options -->
-
     <property name="compiler.debug" value="on"/>
     <property name="compiler.generate.no.warnings" value="off"/>
     <property name="compiler.args" value=""/>
@@ -49,9 +46,6 @@
         <exclude name="**/?*.clj"/>
     </patternset>
 
-
-    <!-- Project Libraries -->
-
     <path id="library.apache_commons.classpath">
         <pathelement location="${basedir}/lib/commons-codec-1.6.jar"/>
         <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
@@ -86,13 +80,7 @@
         <pathelement location="${basedir}/lib/sqlite-jdbc-3.7.15-SNAPSHOT.jar"/>
     </path>
 
-    <!-- Modules -->
-
-
-    <!-- Module PircBotX -->
-
     <dirname property="module.pircbotx.basedir" file="${ant.file}"/>
-
 
     <property name="compiler.args.pircbotx" value="${compiler.args}"/>
 
@@ -171,10 +159,7 @@
         <delete dir="${basedir}/target"/>
     </target>
 
-    <!-- Module Google -->
-
     <dirname property="module.google.basedir" file="${ant.file}"/>
-
 
     <property name="compiler.args.google" value="${compiler.args}"/>
 
@@ -254,10 +239,7 @@
         </copy>
     </target>
 
-    <!-- Module URL -->
-
     <dirname property="module.url.basedir" file="${ant.file}"/>
-
 
     <property name="compiler.args.url" value="${compiler.args}"/>
 
@@ -427,7 +409,6 @@
             <fileset dir="${artifact.temp.output.url:jar}"/>
         </copy>
 
-        <!-- Delete temporary files -->
         <delete dir="${artifacts.temp.dir}"/>
     </target>
 
