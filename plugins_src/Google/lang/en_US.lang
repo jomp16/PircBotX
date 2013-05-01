@@ -1,0 +1,24 @@
+#
+# Copyright (C) 2013 jomp16
+#
+# This file is part of Google
+#
+# Google is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Google is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Google. If not, see <http://www.gnu.org/licenses/>.
+#
+
+Result=\u0002Link #%s: %s\u000F (at %s)
+Help1=Search on Google using the term given. Usage: %sgoogle "<the term to search>" N (where N is the number of links to give, current maximum is 4, optional)
+Error=Error while searching
+NoResultsFound=No results found :'(
+CommandSyntax=Syntax: %sgoogle "<the term to search>" N (where N is the number of links to give, current maximum is 4, optional)

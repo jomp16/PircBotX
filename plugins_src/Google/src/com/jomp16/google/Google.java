@@ -44,10 +44,9 @@ public class Google extends ListenerAdapter {
     public Google() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-
         String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
         URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
-        languageManager = new LanguageManager(url.openStream());
+        languageManager = new LanguageManager(url);
     }
 
     @Override

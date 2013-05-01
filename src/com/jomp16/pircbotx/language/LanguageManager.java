@@ -20,14 +20,20 @@
 package com.jomp16.pircbotx.language;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 public class LanguageManager {
     private Properties properties = new Properties();
 
-    public LanguageManager(InputStream inputStream) throws IOException {
-        properties.load(inputStream);
+    public LanguageManager(URL url) throws IOException {
+        try {
+            properties.load(url.openStream());
+        } catch (IOException e) {
+            // If file not found, load the default language
+            String raw = url.getFile().substring(0, url.getFile().length() - 10) + "en_US.lang";
+            properties.load(new URL("jar:" + raw).openStream());
+        }
     }
 
     public String getString(String key) {

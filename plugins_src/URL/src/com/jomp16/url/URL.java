@@ -45,10 +45,9 @@ public class URL extends ListenerAdapter {
     public URL() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-
         String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
         java.net.URL url = new java.net.URL("jar:file:" + jarPath + "!" + fileNameFormatted);
-        languageManager = new LanguageManager(url.openStream());
+        languageManager = new LanguageManager(url);
     }
 
     @Override

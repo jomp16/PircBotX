@@ -32,10 +32,9 @@ import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,11 +72,6 @@ public class Main {
         }*/
 
         executeStart();
-        /*while (true) {
-            Runtime.getRuntime().gc();
-            logging.writeUsedRAM();
-            Thread.sleep(30000);
-        }*/
         while (true) {
             logging.write("--> ", false);
             String raw = (String) logging.getInputString();
@@ -95,11 +89,11 @@ public class Main {
     private static void executeStart() throws IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IrcException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        boolean jar = Main.class.getResource("Main.class").toString().startsWith("jar:");
 
-        InputStream inputStream = (jar) ? Main.class.getResourceAsStream(fileNameFormatted) : new FileInputStream(new File(System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted));
+        String jarPath = URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+        URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
+        languageManager = new LanguageManager(url);
 
-        languageManager = new LanguageManager(inputStream);
         logging = new Logging();
 
         logging.writeLine("Welcome");
