@@ -1,0 +1,52 @@
+#
+# Copyright (C) 2013 jomp16
+#
+# This file is part of PircBotX
+#
+# PircBotX is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PircBotX is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PircBotX. If not, see <http://www.gnu.org/licenses/>.
+#
+
+##########
+## Main ##
+##########
+
+Welcome=Welcome to PircBotX by jomp16!
+LoadingSQLiteDatabase=Loading SQLite database
+SQLiteLoaded=Loaded SQLite database!
+SQLiteNotFound=SQLite database not found! Opening SQLite configurator for you!
+LoadingPlugins=Loading plugins
+LoadedPlugins=Loaded %d plugins!
+LoadingBot=Loading bot
+LoadedBot=Loaded bot!
+
+ConfirmChar=y
+CancelChar=n
+
+UsedRam=Used RAM: %s
+
+#########################
+## SQLite configurator ##
+#########################
+
+SQLiteWelcome=Welcome to SQLite Configurator of PircBotX!
+SQLiteStep1=What's the name of your bot?
+SQLiteStep2=What's the real name of your bot?
+SQLiteStep3=What's is the indent of your bot? (~"indent"@hostname)
+SQLiteStep4-1=Who's the OP of your bot? (Use the indent of the user (something like nickname@unaffiliated/nickname)
+SQLiteStep4-2=You want to add more OP of your bot? [y/N]
+SQLiteStep5=What's the prefix yo your bot to listen? (something like !)
+SQLiteStep6=What's the IRC server to your bot connect?
+SQLiteStep7-1=What's channels your bot will join at start? (Syntax: #channel)
+SQLiteStep7-2=You want to add more one channel for join? [y/N]
+SQLiteFinished=Congratulations!
