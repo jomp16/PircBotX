@@ -84,7 +84,7 @@ public class Main {
     }
 
     private static void executeStart() throws IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IrcException {
-        String fileNameToFormat = "/languages/%s_%s.lang";
+        String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
         boolean jar = Main.class.getResource("Main.class").toString().startsWith("jar:");
 

@@ -42,7 +42,7 @@ public class URL extends ListenerAdapter {
     private LanguageManager languageManager;
 
     public URL() throws IOException {
-        String fileNameToFormat = "/languages/%s_%s.lang";
+        String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
         languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted), true);
     }
