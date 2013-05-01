@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (C) 2013 jomp16
-  ~
-  ~ This file is part of PircBotX
-  ~
-  ~ PircBotX is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ PircBotX is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with PircBotX. If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <project name="pircbotx" default="all">
+
+    <!-- Compiler options -->
+
     <property name="compiler.debug" value="on"/>
     <property name="compiler.generate.no.warnings" value="off"/>
     <property name="compiler.args" value=""/>
@@ -65,6 +49,9 @@
         <exclude name="**/?*.clj"/>
     </patternset>
 
+
+    <!-- Project Libraries -->
+
     <path id="library.apache_commons.classpath">
         <pathelement location="${basedir}/lib/commons-codec-1.6.jar"/>
         <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
@@ -99,11 +86,17 @@
         <pathelement location="${basedir}/lib/sqlite-jdbc-3.7.15-SNAPSHOT.jar"/>
     </path>
 
+    <!-- Modules -->
+
+
+    <!-- Module PircBotX -->
+
     <dirname property="module.pircbotx.basedir" file="${ant.file}"/>
+
 
     <property name="compiler.args.pircbotx" value="${compiler.args}"/>
 
-    <property name="pircbotx.output.dir" value="${module.pircbotx.basedir}/out/production/PircBotX"/>
+    <property name="pircbotx.output.dir" value="${module.pircbotx.basedir}/target/class/PircBotX"/>
 
     <path id="pircbotx.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -155,6 +148,10 @@
         </dirset>
     </path>
 
+
+    <target name="compile.module.pircbotx" depends="compile.module.pircbotx.production"
+            description="Compile module PircBotX"/>
+
     <target name="compile.module.pircbotx.production" description="Compile module PircBotX; production classes">
         <mkdir dir="${pircbotx.output.dir}"/>
         <javac destdir="${pircbotx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
@@ -174,15 +171,14 @@
         </copy>
     </target>
 
-    <target name="clean" description="cleanup all">
-        <delete dir="${basedir}/target"/>
-    </target>
+    <!-- Module Google -->
 
     <dirname property="module.google.basedir" file="${ant.file}"/>
 
+
     <property name="compiler.args.google" value="${compiler.args}"/>
 
-    <property name="google.output.dir" value="${module.google.basedir}/out/production/Google"/>
+    <property name="google.output.dir" value="${module.google.basedir}/target/class/Google"/>
 
     <path id="google.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -238,7 +234,11 @@
         </dirset>
     </path>
 
-    <target name="compile.module.google.production"
+
+    <target name="compile.module.google" depends="compile.module.google.production"
+            description="Compile module Google"/>
+
+    <target name="compile.module.google.production" depends="compile.module.pircbotx"
             description="Compile module Google; production classes">
         <mkdir dir="${google.output.dir}"/>
         <javac destdir="${google.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
@@ -258,11 +258,14 @@
         </copy>
     </target>
 
+    <!-- Module URL -->
+
     <dirname property="module.url.basedir" file="${ant.file}"/>
+
 
     <property name="compiler.args.url" value="${compiler.args}"/>
 
-    <property name="url.output.dir" value="${module.url.basedir}/out/production/URL"/>
+    <property name="url.output.dir" value="${module.url.basedir}/target/class/URL"/>
 
     <path id="url.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -318,7 +321,11 @@
         </dirset>
     </path>
 
-    <target name="compile.module.url.production"
+
+    <target name="compile.module.url" depends="compile.module.url.production"
+            description="Compile module URL"/>
+
+    <target name="compile.module.url.production" depends="compile.module.pircbotx"
             description="Compile module URL; production classes">
         <mkdir dir="${url.output.dir}"/>
         <javac destdir="${url.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
@@ -342,6 +349,14 @@
         <!-- Perform any build initialization in this target -->
     </target>
 
+    <target name="clean" description="cleanup all">
+        <delete dir="${basedir}/target"/>
+    </target>
+
+    <target name="build.modules"
+            depends="init, clean, compile.module.pircbotx, compile.module.google, compile.module.url"
+            description="build all modules"/>
+
     <target name="init.artifacts">
         <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
         <property name="artifact.output.google:jar" value="${basedir}/target/plugins"/>
@@ -353,12 +368,13 @@
         <property name="temp.jar.path.URL.jar" value="${artifacts.temp.dir}/URL.jar"/>
     </target>
 
-    <target name="artifact.google:jar" depends="init.artifacts"
+    <target name="artifact.google:jar" depends="init.artifacts, compile.module.google"
             description="Build &#39;Google:jar&#39; artifact">
         <property name="artifact.temp.output.google:jar" value="${artifacts.temp.dir}/Google_jar"/>
         <mkdir dir="${artifact.temp.output.google:jar}"/>
         <jar destfile="${temp.jar.path.Google.jar}" filesetmanifest="mergewithoutmain">
             <zipfileset dir="${google.output.dir}"/>
+            <zipfileset src="${basedir}/lib/gson-2.2.3.jar"/>
             <zipfileset src="${basedir}/lib/fluent-hc-4.2.3.jar"/>
             <zipfileset src="${basedir}/lib/commons-codec-1.6.jar"/>
             <zipfileset src="${basedir}/lib/httpclient-4.2.3.jar"/>
@@ -366,14 +382,13 @@
             <zipfileset src="${basedir}/lib/httpcore-4.2.2.jar"/>
             <zipfileset src="${basedir}/lib/commons-lang3-3.1.jar"/>
             <zipfileset src="${basedir}/lib/commons-logging-1.1.1.jar"/>
-            <zipfileset src="${basedir}/lib/gson-2.2.3.jar"/>
-            <zipfileset dir="${basedir}/plugins_src/Google/lang" prefix="lang"/>
             <zipfileset file="${basedir}/plugins_src/Google/plugin.properties"/>
+            <zipfileset dir="${basedir}/plugins_src/Google/lang" prefix="lang"/>
         </jar>
         <copy file="${temp.jar.path.Google.jar}" tofile="${artifact.temp.output.google:jar}/Google.jar"/>
     </target>
 
-    <target name="artifact.pircbotx:jar" depends="init.artifacts"
+    <target name="artifact.pircbotx:jar" depends="init.artifacts, compile.module.pircbotx"
             description="Build &#39;PircBotX:jar&#39; artifact">
         <property name="artifact.temp.output.pircbotx:jar" value="${artifacts.temp.dir}/PircBotX_jar"/>
         <mkdir dir="${artifact.temp.output.pircbotx:jar}"/>
@@ -385,21 +400,20 @@
         <jar destfile="${temp.jar.path.PircBotX.jar}" manifest="${artifacts.temp.dir}/MANIFEST.MF"
              filesetmanifest="mergewithoutmain">
             <zipfileset dir="${pircbotx.output.dir}"/>
+            <zipfileset dir="${basedir}/lang" prefix="lang"/>
+            <zipfileset src="${basedir}/lib/pircbotx-unified.jar"/>
             <zipfileset src="${basedir}/lib/sqlite-jdbc-3.7.15-SNAPSHOT.jar"/>
             <zipfileset src="${basedir}/lib/slf4j-nop-1.7.5.jar"/>
-            <zipfileset src="${basedir}/lib/pircbotx-unified.jar"/>
-            <zipfileset dir="${basedir}/lang" prefix="lang"/>
         </jar>
         <copy file="${temp.jar.path.PircBotX.jar}" tofile="${artifact.temp.output.pircbotx:jar}/PircBotX.jar"/>
     </target>
 
-    <target name="artifact.url:jar" depends="init.artifacts"
+    <target name="artifact.url:jar" depends="init.artifacts, compile.module.url"
             description="Build &#39;URL:jar&#39; artifact">
         <property name="artifact.temp.output.url:jar" value="${artifacts.temp.dir}/URL_jar"/>
         <mkdir dir="${artifact.temp.output.url:jar}"/>
         <jar destfile="${temp.jar.path.URL.jar}" filesetmanifest="mergewithoutmain">
             <zipfileset dir="${url.output.dir}"/>
-            <zipfileset src="${basedir}/lib/jsoup-1.7.2.jar"/>
             <zipfileset src="${basedir}/lib/fluent-hc-4.2.3.jar"/>
             <zipfileset src="${basedir}/lib/commons-codec-1.6.jar"/>
             <zipfileset src="${basedir}/lib/httpclient-4.2.3.jar"/>
@@ -407,6 +421,7 @@
             <zipfileset src="${basedir}/lib/httpcore-4.2.2.jar"/>
             <zipfileset src="${basedir}/lib/commons-lang3-3.1.jar"/>
             <zipfileset src="${basedir}/lib/commons-logging-1.1.1.jar"/>
+            <zipfileset src="${basedir}/lib/jsoup-1.7.2.jar"/>
             <zipfileset dir="${basedir}/plugins_src/URL/lang" prefix="lang"/>
             <zipfileset file="${basedir}/plugins_src/URL/plugin.properties"/>
         </jar>
@@ -428,8 +443,9 @@
             <fileset dir="${artifact.temp.output.url:jar}"/>
         </copy>
 
+        <!-- Delete temporary files -->
         <delete dir="${artifacts.temp.dir}"/>
     </target>
 
-    <target name="all" depends="build.all.artifacts" description="build all"/>
+    <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 </project>
