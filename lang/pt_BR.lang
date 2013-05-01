@@ -17,9 +17,9 @@
 # along with PircBotX. If not, see <http://www.gnu.org/licenses/>.
 #
 
-##############
+##########
 ## Main ##
-##############
+##########
 
 Welcome=Bem vindo ao PircBotX por jomp16!
 LoadingSQLiteDatabase=Carregando o banco de dados SQLite

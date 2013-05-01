@@ -71,15 +71,24 @@ public class Main {
                 System.out.println(a);
             }
         }*/
-        /*for (Class class1 : classes) {
-            class1.newInstance();
-        }*/
 
         executeStart();
-        while (true) {
+        /*while (true) {
             Runtime.getRuntime().gc();
             logging.writeUsedRAM();
             Thread.sleep(30000);
+        }*/
+        while (true) {
+            logging.write("--> ", false);
+            String raw = (String) logging.getInputString();
+            if (raw.startsWith("exit")) {
+                botX.disconnect();
+                connection.close();
+                System.exit(0);
+            }
+            if (raw.startsWith("say")) {
+                // TODO
+            }
         }
     }
 
@@ -88,12 +97,7 @@ public class Main {
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
         boolean jar = Main.class.getResource("Main.class").toString().startsWith("jar:");
 
-        InputStream inputStream;
-        if (jar) {
-            inputStream = Main.class.getResourceAsStream(fileNameFormatted);
-        } else {
-            inputStream = new FileInputStream(new File(System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted));
-        }
+        InputStream inputStream = (jar) ? Main.class.getResourceAsStream(fileNameFormatted) : new FileInputStream(new File(System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted));
 
         languageManager = new LanguageManager(inputStream);
         logging = new Logging();
@@ -148,11 +152,10 @@ public class Main {
                 .setLogin(sqLiteManager.getData("SELECT * FROM bot_config", "Indent"))
                 .setServer(sqLiteManager.getData("SELECT * FROM bot_config", "IRCServer"), 6667)
                 .setListenerManager(manager)
-                .setShutdownHookEnabled(false)
+                .setShutdownHookEnabled(true)
                 .buildConfiguration());
         botX.connect();
 
-        // Channels shit
         ResultSet resultSet = connection.prepareStatement("SELECT * FROM channels").executeQuery();
         while (resultSet.next()) {
             botX.joinChannel(resultSet.getString("channel"));

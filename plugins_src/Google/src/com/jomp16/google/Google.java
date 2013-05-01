@@ -31,6 +31,7 @@ import org.pircbotx.hooks.events.PrivateMessageEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -43,43 +44,50 @@ public class Google extends ListenerAdapter {
     public Google() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted));
+
+        String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+        URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
+        languageManager = new LanguageManager(url.openStream());
     }
 
     @Override
     public void onMessage(MessageEvent event) throws IOException {
-        if (event.getMessage().startsWith(prefix + "google")) {
-            if (event.getMessage().length() >= 10) {
-                String raw1 = event.getMessage().substring(9);
-                if (raw1.length() >= 1) {
-                    int index1 = raw1.indexOf("\"");
-                    String term = raw1.substring(0, index1);
-                    int num = (raw1.substring(index1 + 1).length() >= 2) ? Integer.parseInt(raw1.substring(index1 + 2)) : 1;
+        try {
+            if (event.getMessage().startsWith(prefix + "google")) {
+                if (event.getMessage().length() >= 10) {
+                    String raw1 = event.getMessage().substring(9);
+                    if (raw1.length() >= 1) {
+                        int index1 = raw1.indexOf("\"");
+                        String term = raw1.substring(0, index1);
+                        int num = (raw1.substring(index1 + 1).length() >= 2) ? Integer.parseInt(raw1.substring(index1 + 2)) : 1;
 
-                    String url = String.format(GOOGLE, URLEncoder.encode(term, "UTF-8"));
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
+                        String url = String.format(GOOGLE, URLEncoder.encode(term, "UTF-8"));
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
 
-                    GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
+                        GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
 
-                    reader.close();
-                    if (!search.responseStatus.equals("200")) {
-                        event.respond(languageManager.getString("Error"));
-                        return;
+                        reader.close();
+                        if (!search.responseStatus.equals("200")) {
+                            event.respond(languageManager.getString("Error"));
+                            return;
+                        }
+                        if (search.responseData.results.size() <= 0) {
+                            event.respond(languageManager.getString("NoResultsFound"));
+                            return;
+                        }
+
+                        for (int i = 0; i < num; i++) {
+                            String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(i).titleNoFormatting);
+                            String url2 = URLDecoder.decode(search.responseData.results.get(i).unescapedUrl, "UTF-8");
+                            event.respond(languageManager.getString("Result", (i + 1), title, url2));
+                        }
                     }
-                    if (search.responseData.results.size() <= 0) {
-                        event.respond(languageManager.getString("NoResultsFound"));
-                        return;
-                    }
-
-                    for (int i = 0; i < num; i++) {
-                        String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(i).titleNoFormatting);
-                        String url2 = URLDecoder.decode(search.responseData.results.get(i).unescapedUrl, "UTF-8");
-                        event.respond(languageManager.getString("Result", (i + 1), title, url2));
-                    }
+                } else {
+                    event.respond(languageManager.getString("CommandSyntax", prefix));
                 }
-            } else {
-                event.respond(languageManager.getString("CommandSyntax", prefix));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

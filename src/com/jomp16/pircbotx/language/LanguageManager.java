@@ -21,7 +21,6 @@ package com.jomp16.pircbotx.language;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class LanguageManager {
@@ -34,7 +33,7 @@ public class LanguageManager {
     public String getString(String key) {
         try {
             return new String(properties.getProperty(key).getBytes("ISO-8859-1"), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             // Ignore
         }
         return null;
@@ -43,7 +42,7 @@ public class LanguageManager {
     public String getString(String key, Object... param) {
         try {
             return String.format(new String(properties.getProperty(key).getBytes("ISO-8859-1"), "UTF-8"), param);
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             // Ignore
         }
         return null;

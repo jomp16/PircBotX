@@ -32,6 +32,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -44,7 +45,10 @@ public class URL extends ListenerAdapter {
     public URL() throws IOException {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        languageManager = new LanguageManager(getClass().getResourceAsStream(fileNameFormatted));
+
+        String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+        java.net.URL url = new java.net.URL("jar:file:" + jarPath + "!" + fileNameFormatted);
+        languageManager = new LanguageManager(url.openStream());
     }
 
     @Override
