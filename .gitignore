@@ -6,3 +6,4 @@ plugins/
 .idea/
 out/
 *.jar
+target/
