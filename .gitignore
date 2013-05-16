@@ -7,3 +7,4 @@ plugins/
 out/
 *.jar
 target/
+*.zip

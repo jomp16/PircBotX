@@ -66,7 +66,7 @@ public class Say extends ListenerAdapter {
             if (args.size() >= 3) {
                 String channel = args.get(1);
                 String message = args.get(2);
-                Main.getBotX().sendMessage(Main.getBotX().getUserChannelDao().getChannel(channel), message);
+                event.getBot().sendIRC().message(channel, message);
                 event.respond(languageManager.getString("MessageSended"));
             } else {
                 event.respond(languageManager.getString("CommandSyntax", prefix));
@@ -96,7 +96,7 @@ public class Say extends ListenerAdapter {
             if (args.size() >= 3) {
                 String channel = args.get(1);
                 String message = args.get(2);
-                Main.getBotX().sendMessage(Main.getBotX().getUserChannelDao().getChannel(channel), message);
+                event.getBot().sendIRC().message(channel, message);
                 event.respond(languageManager.getString("MessageSended"));
             } else {
                 event.respond(languageManager.getString("CommandSyntax", prefix));

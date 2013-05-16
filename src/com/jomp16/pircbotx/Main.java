@@ -26,13 +26,12 @@ import com.jomp16.pircbotx.sqlite.SQLiteConfigurator;
 import com.jomp16.pircbotx.sqlite.SQLiteManager;
 import lombok.Getter;
 import org.pircbotx.Configuration;
+import org.pircbotx.MultiBotManager;
 import org.pircbotx.PircBotX;
-import org.pircbotx.exception.IrcException;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
 
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.sql.Connection;
@@ -53,7 +52,7 @@ public class Main {
     @Getter
     private static ArrayList<Class> plugins;
     @Getter
-    private static PircBotX botX;
+    private static MultiBotManager multiBotManager = new MultiBotManager();
     @Getter
     private static String prefix;
     @Getter
@@ -62,7 +61,7 @@ public class Main {
     private static ArrayList<String> OPs = new ArrayList<>();
     private static ListenerManager<PircBotX> manager = new ThreadedListenerManager<>();
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IOException, IrcException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         /*plugins = new PluginLoader().getPlugins();
         for (Class plugin : plugins) {
             Method method = plugin.getDeclaredMethod("getHelp");
@@ -95,7 +94,7 @@ public class Main {
                     if (args1.size() >= 3) {
                         String channel = args1.get(1);
                         String message = args1.get(2);
-                        botX.sendMessage(botX.getUserChannelDao().getChannel(channel), message);
+                        multiBotManager.getBotById(0).sendIRC().message(multiBotManager.getBotById(0).getUserChannelDao().getChannel(channel).getName(), message);
                         System.out.println("Message sended!");
                     } else {
                         System.out.println("Syntax: say <#channel> \"message\"");
@@ -104,14 +103,14 @@ public class Main {
                 case "exit":
                     System.out.println("Shutting down");
                     connection.close();
-                    botX.disconnect();
+                    multiBotManager.stopAndWait();
                     System.exit(0);
                     break;
             }
         }
     }
 
-    private static void executeStart() throws IOException, ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException, IrcException {
+    private static void executeStart() throws Exception {
         String fileNameToFormat = "/lang/%s_%s.lang";
         String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
         boolean jar = Main.class.getResource("Main.class").toString().startsWith("jar:");
@@ -161,27 +160,29 @@ public class Main {
         resultSet.close();
     }
 
-    private static void doPlugins() throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+    private static void doPlugins() throws Exception {
         plugins = new PluginLoader().getPlugins();
         for (Class plugin : plugins) {
             manager.addListener((Listener) plugin.newInstance());
         }
     }
 
-    private static void doPircBotX() throws SQLException, IrcException, IOException {
-        botX = new PircBotX(new Configuration.Builder()
+    private static void doPircBotX() throws Exception {
+        multiBotManager.addBot(new Configuration.Builder()
                 .setName(sqLiteManager.getData("SELECT * FROM bot_config", "Name"))
-                .setVersion(sqLiteManager.getData("SELECT * FROM bot_config", "RealName"))
                 .setLogin(sqLiteManager.getData("SELECT * FROM bot_config", "Indent"))
-                .setServer(sqLiteManager.getData("SELECT * FROM bot_config", "IRCServer"), 6667)
+                .setVersion(sqLiteManager.getData("SELECT * FROM bot_config", "RealName"))
+                .setAutoNickChange(true)
+                .setServerHostname(sqLiteManager.getData("SELECT * FROM bot_config", "IRCServer"))
                 .setListenerManager(manager)
-                        //.setShutdownHookEnabled(true)
                 .buildConfiguration());
-        botX.connect();
+        multiBotManager.start();
+
+        Thread.sleep(5000);
 
         ResultSet resultSet = connection.prepareStatement("SELECT * FROM channels").executeQuery();
         while (resultSet.next()) {
-            botX.joinChannel(resultSet.getString("channel"));
+            multiBotManager.getBotById(0).sendIRC().joinChannel(resultSet.getString("channel"));
         }
         resultSet.close();
     }

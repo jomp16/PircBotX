@@ -19,7 +19,6 @@
 
 package com.jomp16.url;
 
-import com.jomp16.pircbotx.Main;
 import com.jomp16.pircbotx.language.LanguageManager;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -62,7 +61,7 @@ public class URL extends ListenerAdapter {
             Document document = Jsoup.connect(raw).followRedirects(true).get().normalise();
             StringBuilder builder = new StringBuilder();
             builder.append(languageManager.getString("Text", document.title(), raw));
-            Main.getBotX().sendMessage(event.getChannel(), builder.toString());
+            event.getBot().sendIRC().message(event.getChannel().getName(), builder.toString());
         }
     }
 
@@ -73,7 +72,7 @@ public class URL extends ListenerAdapter {
             Document document = Jsoup.connect(raw).followRedirects(true).get().normalise();
             StringBuilder builder = new StringBuilder();
             builder.append(languageManager.getString("Text", document.title(), raw));
-            Main.getBotX().sendMessage(event.getUser(), builder.toString());
+            event.getBot().sendIRC().message(event.getUser().getNick(), builder.toString());
         }
     }
 
