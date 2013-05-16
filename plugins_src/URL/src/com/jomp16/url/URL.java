@@ -42,19 +42,21 @@ import java.security.cert.X509Certificate;
 public class URL extends ListenerAdapter {
     private LanguageManager languageManager;
 
-    public URL() throws IOException {
-        String fileNameToFormat = "/lang/%s_%s.lang";
-        String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+    public URL() throws IOException, NoSuchAlgorithmException, KeyManagementException {
+        String fileNameToFormat = "/lang/%s_%s.lang",
+                fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country")),
+                jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+
         java.net.URL url = new java.net.URL("jar:file:" + jarPath + "!" + fileNameFormatted);
         languageManager = new LanguageManager(url);
-    }
 
-    @Override
-    public void onMessage(MessageEvent event) throws NoSuchAlgorithmException, KeyManagementException, IOException {
         SSLContext context = SSLContext.getInstance("TLS");
         context.init(new KeyManager[0], new TrustManager[]{new DefaultTrustManager()}, new SecureRandom());
         SSLContext.setDefault(context);
+    }
+
+    @Override
+    public void onMessage(MessageEvent event) throws IOException {
         if (event.getMessage().contains("http://") || event.getMessage().contains("https://") || event.getMessage().startsWith("www.")) {
             String raw = event.getMessage().startsWith("www.") ? new StringBuilder(event.getMessage()).insert(0, "http://").toString() : event.getMessage();
             Document document = Jsoup.connect(raw).followRedirects(true).get().normalise();
@@ -65,10 +67,7 @@ public class URL extends ListenerAdapter {
     }
 
     @Override
-    public void onPrivateMessage(PrivateMessageEvent event) throws IOException, NoSuchAlgorithmException, KeyManagementException {
-        SSLContext context = SSLContext.getInstance("TLS");
-        context.init(new KeyManager[0], new TrustManager[]{new DefaultTrustManager()}, new SecureRandom());
-        SSLContext.setDefault(context);
+    public void onPrivateMessage(PrivateMessageEvent event) throws IOException {
         if (event.getMessage().contains("http://") || event.getMessage().contains("https://") || event.getMessage().startsWith("www.")) {
             String raw = event.getMessage().startsWith("www.") ? new StringBuilder(event.getMessage()).insert(0, "http://").toString() : event.getMessage();
             Document document = Jsoup.connect(raw).followRedirects(true).get().normalise();

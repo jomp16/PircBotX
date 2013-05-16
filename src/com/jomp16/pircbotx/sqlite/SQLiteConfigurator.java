@@ -48,28 +48,57 @@ public class SQLiteConfigurator {
     }
 
     private void Step1() {
-        Main.getLogging().writeLine("SQLiteStep1");
-        Main.getLogging().write("--> ", false);
-        botName = (String) Main.getLogging().getInputString();
+        while (true) {
+            Main.getLogging().writeLine("SQLiteStep1");
+            Main.getLogging().write("--> ", false);
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                botName = a;
+                break;
+            } else {
+                System.out.println("Derp...");
+            }
+        }
     }
 
     private void Step2() {
-        Main.getLogging().writeLine("SQLiteStep2");
-        Main.getLogging().write("--> ", false);
-        realName = (String) Main.getLogging().getInputString();
+        while (true) {
+            Main.getLogging().writeLine("SQLiteStep2");
+            Main.getLogging().write("--> ", false);
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                realName = a;
+                break;
+            } else {
+                System.out.println("Derp...");
+            }
+        }
     }
 
     private void Step3() {
-        Main.getLogging().writeLine("SQLiteStep3");
-        Main.getLogging().write("--> ", false);
-        indent = (String) Main.getLogging().getInputString();
+        while (true) {
+            Main.getLogging().writeLine("SQLiteStep3");
+            Main.getLogging().write("--> ", false);
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                indent = a;
+                break;
+            } else {
+                System.out.println("Derp...");
+            }
+        }
     }
 
     private void Step4() {
         while (true) {
             Main.getLogging().writeLine("SQLiteStep4-1");
             Main.getLogging().write("--> ", false);
-            OPs.add((String) Main.getLogging().getInputString());
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                OPs.add(a);
+            } else {
+                System.out.println("Derp...");
+            }
             Main.getLogging().writeLine("SQLiteStep4-2");
             Main.getLogging().write("--> ", false);
             String raw = ((String) Main.getLogging().getInputString()).toLowerCase();
@@ -80,22 +109,43 @@ public class SQLiteConfigurator {
     }
 
     private void Step5() {
-        Main.getLogging().writeLine("SQLiteStep5");
-        Main.getLogging().write("--> ", false);
-        prefix = (String) Main.getLogging().getInputString();
+        while (true) {
+            Main.getLogging().writeLine("SQLiteStep5");
+            Main.getLogging().write("--> ", false);
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                prefix = a;
+                break;
+            } else {
+                System.out.println("Derp...");
+            }
+        }
     }
 
     private void Step6() {
-        Main.getLogging().writeLine("SQLiteStep6");
-        Main.getLogging().write("--> ", false);
-        ircHost = (String) Main.getLogging().getInputString();
+        while (true) {
+            Main.getLogging().writeLine("SQLiteStep6");
+            Main.getLogging().write("--> ", false);
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                ircHost = a;
+                break;
+            } else {
+                System.out.println("Derp...");
+            }
+        }
     }
 
     private void Step7() {
         while (true) {
             Main.getLogging().writeLine("SQLiteStep7-1");
             Main.getLogging().write("--> ", false);
-            channels.add((String) Main.getLogging().getInputString());
+            String a = (String) Main.getLogging().getInputString();
+            if (a.length() != 0) {
+                channels.add(a);
+            } else {
+                System.out.println("Derp...");
+            }
             Main.getLogging().writeLine("SQLiteStep7-2");
             Main.getLogging().write("--> ", false);
             String raw = ((String) Main.getLogging().getInputString()).toLowerCase();

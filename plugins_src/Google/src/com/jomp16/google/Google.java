@@ -40,14 +40,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Google extends ListenerAdapter {
-    private String prefix = Main.getPrefix();
-    private String GOOGLE = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s";
+    private String prefix = Main.getPrefix(), GOOGLE = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s";
     private LanguageManager languageManager;
 
     public Google() throws IOException {
-        String fileNameToFormat = "/lang/%s_%s.lang";
-        String fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country"));
-        String jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+        String fileNameToFormat = "/lang/%s_%s.lang",
+                fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country")),
+                jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
+
         URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
         languageManager = new LanguageManager(url);
     }
@@ -68,7 +68,7 @@ public class Google extends ListenerAdapter {
                 args.add(matcher.group());
             }
         }
-        if (args.get(0).equals(prefix + "google")) {
+        if (args.get(0).toLowerCase().equals(prefix + "google")) {
             if (args.size() >= 2) {
                 String url = String.format(GOOGLE, URLEncoder.encode(args.get(1), "UTF-8"));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
@@ -118,7 +118,7 @@ public class Google extends ListenerAdapter {
                 args.add(matcher.group());
             }
         }
-        if (args.get(0).equals(prefix + "google")) {
+        if (args.get(0).toLowerCase().equals(prefix + "google")) {
             if (args.size() >= 2) {
                 String url = String.format(GOOGLE, URLEncoder.encode(args.get(1), "UTF-8"));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));

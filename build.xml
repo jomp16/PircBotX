@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2013 jomp16
+  ~
+  ~ This file is part of PircBotX
+  ~
+  ~ PircBotX is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ PircBotX is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with PircBotX. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
 <project name="pircbotx" default="all">
+
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
 
     <!-- Compiler options -->
 
@@ -97,6 +121,7 @@
     <property name="compiler.args.pircbotx" value="${compiler.args}"/>
 
     <property name="pircbotx.output.dir" value="${module.pircbotx.basedir}/target/class/PircBotX"/>
+    <property name="pircbotx.testoutput.dir" value="${module.pircbotx.basedir}/target/test/PircBotX"/>
 
     <path id="pircbotx.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -126,6 +151,7 @@
     </path>
 
     <path id="pircbotx.runtime.module.classpath">
+        <pathelement location="${pircbotx.testoutput.dir}"/>
         <pathelement location="${pircbotx.output.dir}"/>
         <path refid="library.sqlite-jdbc-3.7.15-snapshot.classpath"/>
         <path refid="library.pircbotx-unified.classpath"/>
@@ -149,12 +175,13 @@
     </path>
 
 
-    <target name="compile.module.pircbotx" depends="compile.module.pircbotx.production"
+    <target name="compile.module.pircbotx" depends="compile.module.pircbotx.production,compile.module.pircbotx.tests"
             description="Compile module PircBotX"/>
 
     <target name="compile.module.pircbotx.production" description="Compile module PircBotX; production classes">
         <mkdir dir="${pircbotx.output.dir}"/>
-        <javac includeantruntime="false" destdir="${pircbotx.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${pircbotx.output.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.pircbotx}"/>
             <bootclasspath refid="pircbotx.module.bootclasspath"/>
@@ -171,6 +198,9 @@
         </copy>
     </target>
 
+    <target name="compile.module.pircbotx.tests" depends="compile.module.pircbotx.production"
+            description="compile module PircBotX; test classes" unless="skip.tests"/>
+
     <!-- Module Google -->
 
     <dirname property="module.google.basedir" file="${ant.file}"/>
@@ -179,6 +209,7 @@
     <property name="compiler.args.google" value="${compiler.args}"/>
 
     <property name="google.output.dir" value="${module.google.basedir}/target/class/Google"/>
+    <property name="google.testoutput.dir" value="${module.google.basedir}/target/test/Google"/>
 
     <path id="google.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -203,6 +234,7 @@
 
     <path id="google.module.classpath">
         <pathelement location="${google.output.dir}"/>
+        <pathelement location="${pircbotx.testoutput.dir}"/>
         <pathelement location="${pircbotx.output.dir}"/>
         <path refid="library.pircbotx-unified.classpath"/>
         <path refid="library.lombok.classpath"/>
@@ -211,6 +243,7 @@
     </path>
 
     <path id="google.runtime.module.classpath">
+        <pathelement location="${google.testoutput.dir}"/>
         <pathelement location="${google.output.dir}"/>
         <path refid="pircbotx.runtime.module.classpath"/>
         <path refid="library.pircbotx-unified.classpath"/>
@@ -235,13 +268,14 @@
     </path>
 
 
-    <target name="compile.module.google" depends="compile.module.google.production"
+    <target name="compile.module.google" depends="compile.module.google.production,compile.module.google.tests"
             description="Compile module Google"/>
 
     <target name="compile.module.google.production" depends="compile.module.pircbotx"
             description="Compile module Google; production classes">
         <mkdir dir="${google.output.dir}"/>
-        <javac includeantruntime="false" destdir="${google.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${google.output.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.google}"/>
             <bootclasspath refid="google.module.bootclasspath"/>
@@ -258,6 +292,92 @@
         </copy>
     </target>
 
+    <target name="compile.module.google.tests" depends="compile.module.google.production"
+            description="compile module Google; test classes" unless="skip.tests"/>
+
+    <!-- Module Say -->
+
+    <dirname property="module.say.basedir" file="${ant.file}"/>
+
+
+    <property name="compiler.args.say" value="${compiler.args}"/>
+
+    <property name="say.output.dir" value="${module.say.basedir}/target/class/Say"/>
+    <property name="say.testoutput.dir" value="${module.say.basedir}/target/test/Say"/>
+
+    <path id="say.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="say.module.production.classpath">
+        <pathelement location="${pircbotx.output.dir}"/>
+        <path refid="library.pircbotx-unified.classpath"/>
+    </path>
+
+    <path id="say.runtime.production.module.classpath">
+        <pathelement location="${say.output.dir}"/>
+        <path refid="pircbotx.runtime.production.module.classpath"/>
+        <path refid="library.pircbotx-unified.classpath"/>
+    </path>
+
+    <path id="say.module.classpath">
+        <pathelement location="${say.output.dir}"/>
+        <pathelement location="${pircbotx.testoutput.dir}"/>
+        <pathelement location="${pircbotx.output.dir}"/>
+        <path refid="library.pircbotx-unified.classpath"/>
+    </path>
+
+    <path id="say.runtime.module.classpath">
+        <pathelement location="${say.testoutput.dir}"/>
+        <pathelement location="${say.output.dir}"/>
+        <path refid="pircbotx.runtime.module.classpath"/>
+        <path refid="library.pircbotx-unified.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.say">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.say">
+        <patternset refid="excluded.from.module.say"/>
+    </patternset>
+
+    <path id="say.module.sourcepath">
+        <dirset dir="${module.say.basedir}/plugins_src/Say">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.say" depends="compile.module.say.production,compile.module.say.tests"
+            description="Compile module Say"/>
+
+    <target name="compile.module.say.production" depends="compile.module.pircbotx"
+            description="Compile module Say; production classes">
+        <mkdir dir="${say.output.dir}"/>
+        <javac includeantruntime="false" destdir="${say.output.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}"
+               memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.say}"/>
+            <bootclasspath refid="say.module.bootclasspath"/>
+            <classpath refid="say.module.production.classpath"/>
+            <src refid="say.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.say"/>
+        </javac>
+
+        <copy todir="${say.output.dir}">
+            <fileset dir="${module.say.basedir}/plugins_src/Say/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.say.tests" depends="compile.module.say.production"
+            description="compile module Say; test classes" unless="skip.tests"/>
+
+
     <!-- Module URL -->
 
     <dirname property="module.url.basedir" file="${ant.file}"/>
@@ -266,6 +386,7 @@
     <property name="compiler.args.url" value="${compiler.args}"/>
 
     <property name="url.output.dir" value="${module.url.basedir}/target/class/URL"/>
+    <property name="url.testoutput.dir" value="${module.url.basedir}/target/test/URL"/>
 
     <path id="url.module.bootclasspath">
         <!-- Paths to be included in compilation bootclasspath -->
@@ -290,6 +411,7 @@
 
     <path id="url.module.classpath">
         <pathelement location="${url.output.dir}"/>
+        <pathelement location="${pircbotx.testoutput.dir}"/>
         <pathelement location="${pircbotx.output.dir}"/>
         <path refid="library.pircbotx-unified.classpath"/>
         <path refid="library.lombok.classpath"/>
@@ -298,6 +420,7 @@
     </path>
 
     <path id="url.runtime.module.classpath">
+        <pathelement location="${url.testoutput.dir}"/>
         <pathelement location="${url.output.dir}"/>
         <path refid="pircbotx.runtime.module.classpath"/>
         <path refid="library.pircbotx-unified.classpath"/>
@@ -322,13 +445,14 @@
     </path>
 
 
-    <target name="compile.module.url" depends="compile.module.url.production"
+    <target name="compile.module.url" depends="compile.module.url.production,compile.module.url.tests"
             description="Compile module URL"/>
 
     <target name="compile.module.url.production" depends="compile.module.pircbotx"
             description="Compile module URL; production classes">
         <mkdir dir="${url.output.dir}"/>
-        <javac includeantruntime="false" destdir="${url.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+        <javac includeantruntime="false" destdir="${url.output.dir}" debug="${compiler.debug}"
+               nowarn="${compiler.generate.no.warnings}"
                memorymaximumsize="${compiler.max.memory}" fork="true">
             <compilerarg line="${compiler.args.url}"/>
             <bootclasspath refid="url.module.bootclasspath"/>
@@ -345,6 +469,9 @@
         </copy>
     </target>
 
+    <target name="compile.module.url.tests" depends="compile.module.url.production"
+            description="compile module URL; test classes" unless="skip.tests"/>
+
     <target name="init" description="Build initialization">
         <!-- Perform any build initialization in this target -->
     </target>
@@ -354,17 +481,19 @@
     </target>
 
     <target name="build.modules"
-            depends="init, clean, compile.module.pircbotx, compile.module.google, compile.module.url"
+            depends="init, clean, compile.module.pircbotx, compile.module.google, compile.module.say, compile.module.url"
             description="build all modules"/>
 
     <target name="init.artifacts">
-        <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+        <property name="artifacts.temp.dir" value="${basedir}/target/__artifacts_temp"/>
         <property name="artifact.output.google:jar" value="${basedir}/target/plugins"/>
         <property name="artifact.output.pircbotx:jar" value="${basedir}/target"/>
+        <property name="artifact.output.say:jar" value="${basedir}/target/plugins"/>
         <property name="artifact.output.url:jar" value="${basedir}/target/plugins"/>
         <mkdir dir="${artifacts.temp.dir}"/>
         <property name="temp.jar.path.Google.jar" value="${artifacts.temp.dir}/Google.jar"/>
         <property name="temp.jar.path.PircBotX.jar" value="${artifacts.temp.dir}/PircBotX.jar"/>
+        <property name="temp.jar.path.Say.jar" value="${artifacts.temp.dir}/Say.jar"/>
         <property name="temp.jar.path.URL.jar" value="${artifacts.temp.dir}/URL.jar"/>
     </target>
 
@@ -392,7 +521,6 @@
             description="Build &#39;PircBotX:jar&#39; artifact">
         <property name="artifact.temp.output.pircbotx:jar" value="${artifacts.temp.dir}/PircBotX_jar"/>
         <mkdir dir="${artifact.temp.output.pircbotx:jar}"/>
-
         <manifest file="${artifacts.temp.dir}/MANIFEST.MF">
             <attribute name="Main-Class"
                        value="com.jomp16.pircbotx.Main"/>
@@ -406,6 +534,18 @@
             <zipfileset src="${basedir}/lib/slf4j-nop-1.7.5.jar"/>
         </jar>
         <copy file="${temp.jar.path.PircBotX.jar}" tofile="${artifact.temp.output.pircbotx:jar}/PircBotX.jar"/>
+    </target>
+
+    <target name="artifact.say:jar" depends="init.artifacts, compile.module.say"
+            description="Build &#39;Say:jar&#39; artifact">
+        <property name="artifact.temp.output.say:jar" value="${artifacts.temp.dir}/Say_jar"/>
+        <mkdir dir="${artifact.temp.output.say:jar}"/>
+        <jar destfile="${temp.jar.path.Say.jar}" filesetmanifest="mergewithoutmain">
+            <zipfileset dir="${say.output.dir}"/>
+            <zipfileset dir="${basedir}/plugins_src/Say/lang" prefix="lang"/>
+            <zipfileset file="${basedir}/plugins_src/Say/plugin.properties"/>
+        </jar>
+        <copy file="${temp.jar.path.Say.jar}" tofile="${artifact.temp.output.say:jar}/Say.jar"/>
     </target>
 
     <target name="artifact.url:jar" depends="init.artifacts, compile.module.url"
@@ -428,7 +568,8 @@
         <copy file="${temp.jar.path.URL.jar}" tofile="${artifact.temp.output.url:jar}/URL.jar"/>
     </target>
 
-    <target name="build.all.artifacts" depends="artifact.google:jar, artifact.pircbotx:jar, artifact.url:jar"
+    <target name="build.all.artifacts"
+            depends="artifact.google:jar, artifact.pircbotx:jar, artifact.say:jar, artifact.url:jar"
             description="Build all artifacts">
         <mkdir dir="${artifact.output.google:jar}"/>
         <copy todir="${artifact.output.google:jar}">
@@ -437,6 +578,10 @@
         <mkdir dir="${artifact.output.pircbotx:jar}"/>
         <copy todir="${artifact.output.pircbotx:jar}">
             <fileset dir="${artifact.temp.output.pircbotx:jar}"/>
+        </copy>
+        <mkdir dir="${artifact.output.say:jar}"/>
+        <copy todir="${artifact.output.say:jar}">
+            <fileset dir="${artifact.temp.output.say:jar}"/>
         </copy>
         <mkdir dir="${artifact.output.url:jar}"/>
         <copy todir="${artifact.output.url:jar}">
