@@ -39,6 +39,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("unchecked")
 public class Main {
@@ -70,23 +72,41 @@ public class Main {
                 System.out.println(a);
             }
         }*/
-
         executeStart();
         while (true) {
+            // TODO
+            ArrayList<String> args1 = new ArrayList<>();
             logging.write("--> ", false);
-            String raw = (String) logging.getInputString();
-            if (raw.startsWith("exit")) {
-                botX.disconnect();
-                connection.close();
-                System.exit(0);
-            }
-            if (raw.startsWith("say")) {
-                // TODO
-            }
-            if (raw.startsWith("ops")) {
-                for (String OP : OPs) {
-                    System.out.println(OP);
+            Matcher matcher = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'").matcher((CharSequence) logging.getInputString());
+            while (matcher.find()) {
+                if (matcher.group(1) != null) {
+                    // Add double-quoted string without the quotes
+                    args1.add(matcher.group(1));
+                } else if (matcher.group(2) != null) {
+                    // Add single-quoted string without the quotes
+                    args1.add(matcher.group(2));
+                } else {
+                    // Add unquoted word
+                    args1.add(matcher.group());
                 }
+            }
+            switch (args1.get(0).toLowerCase()) {
+                case "say":
+                    if (args1.size() >= 3) {
+                        String channel = args1.get(1);
+                        String message = args1.get(2);
+                        botX.sendMessage(botX.getUserChannelDao().getChannel(channel), message);
+                        System.out.println("Message sended!");
+                    } else {
+                        System.out.println("Syntax: say <#channel> \"message\"");
+                    }
+                    break;
+                case "exit":
+                    System.out.println("Shutting down");
+                    connection.close();
+                    botX.disconnect();
+                    System.exit(0);
+                    break;
             }
         }
     }
@@ -99,10 +119,8 @@ public class Main {
         if (jar) {
             String jarPath = URLDecoder.decode(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
             url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
-            //languageManager = new LanguageManager(url);
         } else {
             url = new URL("file:" + System.getProperty("user.dir").replace("\\", "/") + fileNameFormatted);
-            //languageManager = new LanguageManager(new URL(fileNameFormatted));
         }
         languageManager = new LanguageManager(url);
         logging = new Logging();
@@ -157,7 +175,7 @@ public class Main {
                 .setLogin(sqLiteManager.getData("SELECT * FROM bot_config", "Indent"))
                 .setServer(sqLiteManager.getData("SELECT * FROM bot_config", "IRCServer"), 6667)
                 .setListenerManager(manager)
-                //.setShutdownHookEnabled(true)
+                        //.setShutdownHookEnabled(true)
                 .buildConfiguration());
         botX.connect();
 

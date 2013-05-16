@@ -34,7 +34,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Google extends ListenerAdapter {
     private String prefix = Main.getPrefix();
@@ -51,78 +54,105 @@ public class Google extends ListenerAdapter {
 
     @Override
     public void onMessage(MessageEvent event) throws IOException {
-        if (event.getMessage().startsWith(prefix + "google")) {
-            if (event.getMessage().length() >= 10) {
-                String raw1 = event.getMessage().substring(9);
-                if (raw1.length() >= 1) {
-                    int index1 = raw1.indexOf("\"");
-                    String term = raw1.substring(0, index1);
-                    int num = (raw1.substring(index1 + 1).length() >= 2) ? Integer.parseInt(raw1.substring(index1 + 2)) : 1;
+        ArrayList<String> args = new ArrayList<>();
+        Matcher matcher = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'").matcher(event.getMessage());
+        while (matcher.find()) {
+            if (matcher.group(1) != null) {
+                // Add double-quoted string without the quotes
+                args.add(matcher.group(1));
+            } else if (matcher.group(2) != null) {
+                // Add single-quoted string without the quotes
+                args.add(matcher.group(2));
+            } else {
+                // Add unquoted word
+                args.add(matcher.group());
+            }
+        }
+        if (args.get(0).equals(prefix + "google")) {
+            if (args.size() >= 2) {
+                String url = String.format(GOOGLE, URLEncoder.encode(args.get(1), "UTF-8"));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
+                GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
 
-                    String url = String.format(GOOGLE, URLEncoder.encode(term, "UTF-8"));
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
+                reader.close();
+                if (!search.responseStatus.equals("200")) {
+                    event.respond(languageManager.getString("Error"));
+                    return;
+                }
+                if (search.responseData.results.size() <= 0) {
+                    event.respond(languageManager.getString("NoResultsFound"));
+                    return;
+                }
 
-                    GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
-
-                    reader.close();
-                    if (!search.responseStatus.equals("200")) {
-                        event.respond(languageManager.getString("Error"));
-                        return;
-                    }
-                    if (search.responseData.results.size() <= 0) {
-                        event.respond(languageManager.getString("NoResultsFound"));
-                        return;
-                    }
-
-                    for (int i = 0; i < num; i++) {
+                if (args.size() >= 3) {
+                    for (int i = 0; i < Integer.parseInt(args.get(2)); i++) {
                         String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(i).titleNoFormatting);
                         String url2 = URLDecoder.decode(search.responseData.results.get(i).unescapedUrl, "UTF-8");
                         event.respond(languageManager.getString("Result", (i + 1), title, url2));
                     }
+                } else {
+                    String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(0).titleNoFormatting);
+                    String url2 = URLDecoder.decode(search.responseData.results.get(0).unescapedUrl, "UTF-8");
+                    event.respond(languageManager.getString("Result", 1, title, url2));
                 }
             } else {
                 event.respond(languageManager.getString("CommandSyntax", prefix));
             }
+            args.clear();
         }
     }
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent event) throws IOException {
-        if (event.getMessage().startsWith(prefix + "google")) {
-            if (event.getMessage().length() >= 11) {
-                String raw1 = event.getMessage().substring(10);
-                if (raw1.length() >= 1) {
-                    int index1 = raw1.indexOf("\"");
-                    String term = raw1.substring(0, index1);
-                    int num = (raw1.substring(index1 + 1).length() >= 2) ? Integer.parseInt(raw1.substring(index1 + 2)) : 1;
+        ArrayList<String> args = new ArrayList<>();
+        Matcher matcher = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'").matcher(event.getMessage());
+        while (matcher.find()) {
+            if (matcher.group(1) != null) {
+                // Add double-quoted string without the quotes
+                args.add(matcher.group(1));
+            } else if (matcher.group(2) != null) {
+                // Add single-quoted string without the quotes
+                args.add(matcher.group(2));
+            } else {
+                // Add unquoted word
+                args.add(matcher.group());
+            }
+        }
+        if (args.get(0).equals(prefix + "google")) {
+            if (args.size() >= 2) {
+                String url = String.format(GOOGLE, URLEncoder.encode(args.get(1), "UTF-8"));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
+                GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
 
-                    String url = String.format(GOOGLE, URLEncoder.encode(term, "UTF-8"));
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(Request.Get(url).execute().returnContent().asStream()));
+                reader.close();
+                if (!search.responseStatus.equals("200")) {
+                    event.respond(languageManager.getString("Error"));
+                    return;
+                }
+                if (search.responseData.results.size() <= 0) {
+                    event.respond(languageManager.getString("NoResultsFound"));
+                    return;
+                }
 
-                    GoogleSearch search = new Gson().fromJson(reader, GoogleSearch.class);
-
-                    reader.close();
-                    if (!search.responseStatus.equals("200")) {
-                        event.respond(languageManager.getString("Error"));
-                        return;
-                    }
-                    if (search.responseData.results.size() <= 0) {
-                        event.respond(languageManager.getString("NoResultsFound"));
-                        return;
-                    }
-
-                    for (int i = 0; i < num; i++) {
+                if (args.size() >= 3) {
+                    for (int i = 0; i < Integer.parseInt(args.get(2)); i++) {
                         String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(i).titleNoFormatting);
                         String url2 = URLDecoder.decode(search.responseData.results.get(i).unescapedUrl, "UTF-8");
                         event.respond(languageManager.getString("Result", (i + 1), title, url2));
                     }
+                } else {
+                    String title = StringEscapeUtils.unescapeHtml4(search.responseData.results.get(0).titleNoFormatting);
+                    String url2 = URLDecoder.decode(search.responseData.results.get(0).unescapedUrl, "UTF-8");
+                    event.respond(languageManager.getString("Result", 1, title, url2));
                 }
             } else {
                 event.respond(languageManager.getString("CommandSyntax", prefix));
             }
+            args.clear();
         }
     }
 
+    // TODO
     public HashMap<String, String> getCommands() {
         HashMap<String, String> commands = new HashMap<>();
         commands.put("google", languageManager.getString("Help1", prefix));
