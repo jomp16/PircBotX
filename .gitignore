@@ -1,6 +1,5 @@
 *.db.*
 *.db
-src/META-INF/
 plugins/
 .idea/
 out/
