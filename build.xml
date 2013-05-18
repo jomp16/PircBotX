@@ -312,12 +312,14 @@
     <path id="say.module.production.classpath">
         <pathelement location="${pircbotx.output.dir}"/>
         <path refid="library.pircbotx-unified.classpath"/>
+        <path refid="library.lombok.classpath"/>
     </path>
 
     <path id="say.runtime.production.module.classpath">
         <pathelement location="${say.output.dir}"/>
         <path refid="pircbotx.runtime.production.module.classpath"/>
         <path refid="library.pircbotx-unified.classpath"/>
+        <path refid="library.lombok.classpath"/>
     </path>
 
     <path id="say.module.classpath">
@@ -332,6 +334,7 @@
         <pathelement location="${say.output.dir}"/>
         <path refid="pircbotx.runtime.module.classpath"/>
         <path refid="library.pircbotx-unified.classpath"/>
+        <path refid="library.lombok.classpath"/>
     </path>
 
 

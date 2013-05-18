@@ -185,6 +185,8 @@ public class Main {
                 multiBotManager.stopAndWait();
                 System.exit(0);
                 break;
+            } else if (args1.get(0).equals("ram")) {
+                logging.writeUsedRAM();
             } else {
                 for (ConsolePlugin consolePlugin : consolePlugins) {
                     consolePlugin.setArgs(args1);
@@ -226,6 +228,7 @@ public class Main {
                     break;
             }*/
         }
+
     }
 
     private static void executeThread(Object thread) throws Exception {
