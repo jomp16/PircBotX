@@ -40,4 +40,12 @@ public class SQLiteManager {
         }
         return null;
     }
+
+    public void executeUpdate(String SQL) throws SQLException {
+        Statement statement = connection.createStatement();
+        int status = statement.executeUpdate(SQL);
+        if(status == 0) {
+            System.err.println("Error while inserting row");
+        }
+    }
 }

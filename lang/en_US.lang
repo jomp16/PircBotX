@@ -22,12 +22,12 @@
 ##########
 
 Welcome=Welcome to PircBotX by jomp16!
-LoadingSQLiteDatabase=Loading SQLite database
+LoadingSQLiteDatabase=Loading SQLite database...
 SQLiteLoaded=Loaded SQLite database!
 SQLiteNotFound=SQLite database not found! Opening SQLite configurator for you!
-LoadingPlugins=Loading plugins
-LoadedPlugins=Loaded %d plugins!
-LoadingBot=Loading bot
+LoadingPlugins=Loading plugins...
+LoadedPlugins=Loaded %d plugins and %d console commands!
+LoadingBot=Loading bot...
 LoadedBot=Loaded bot!
 
 ConfirmChar=y
@@ -50,3 +50,12 @@ SQLiteStep6=What's the IRC server to your bot connect?
 SQLiteStep7-1=What's channels your bot will join at start? (Syntax: #channel)
 SQLiteStep7-2=You want to add more one channel for join? [y/N]
 SQLiteFinished=Congratulations!
+
+##########
+## Help ##
+##########
+
+AvailableHelp=Available help for following commands: %s
+Help=Plugin help: %s: %s
+HelpSyntax=Syntax: %shelp "plugin" to show a specify help for that plugin or help all to show all available help
+HelpNoResult=No help found for that plugin =(

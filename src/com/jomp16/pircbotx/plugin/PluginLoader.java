@@ -19,19 +19,24 @@
 
 package com.jomp16.pircbotx.plugin;
 
+import lombok.Getter;
+import org.pircbotx.hooks.ListenerAdapter;
+
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Properties;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "unchecked"})
 public class PluginLoader {
-    private ArrayList<Class> plugins = new ArrayList<>();
+    @Getter
+    private ArrayList<ListenerAdapter> plugins = new ArrayList<>();
+    @Getter
+    private ArrayList<ConsolePlugin> commandPlugin = new ArrayList<>();
 
-    public PluginLoader() throws IOException, ClassNotFoundException {
+    public PluginLoader() throws Exception {
         File f = new File(System.getProperty("user.dir").replace("\\", "/") + "/plugins");
         for (File file : f.listFiles()) {
             if (file.getName().endsWith(".jar")) {
@@ -42,12 +47,15 @@ public class PluginLoader {
                 Properties properties = new Properties();
                 properties.load(inputStream);
 
-                plugins.add(Class.forName(properties.getProperty("MainClass"), true, classLoader));
+                if (properties.getProperty("Type").equals("console")) {
+                    commandPlugin.add((ConsolePlugin) Class.forName(properties.getProperty("MainClass"), true, classLoader).newInstance());
+                } else if (properties.getProperty("Type").equals("plugin")) {
+                    plugins.add((ListenerAdapter) Class.forName(properties.getProperty("MainClass"), true, classLoader).newInstance());
+                } else if (properties.getProperty("Type").equals("console&plugin")) {
+                    commandPlugin.add((ConsolePlugin) Class.forName(properties.getProperty("MainClass-Console"), true, classLoader).newInstance());
+                    plugins.add((ListenerAdapter) Class.forName(properties.getProperty("MainClass-Plugin"), true, classLoader).newInstance());
+                }
             }
         }
-    }
-
-    public ArrayList<Class> getPlugins() {
-        return plugins;
     }
 }

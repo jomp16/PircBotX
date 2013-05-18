@@ -17,5 +17,7 @@
 # along with Say. If not, see <http://www.gnu.org/licenses/>.
 #
 
+Help=Envia uma mensagem para o canal especificado, uso: %ssay #canal 'mensagem para enviar'
 MessageSended=Mensagem enviada!
 CommandSyntax=Sintaxe: %ssay #canal "mensagem"
+NoPerm=Você não tem permissão de usar esse comando =(

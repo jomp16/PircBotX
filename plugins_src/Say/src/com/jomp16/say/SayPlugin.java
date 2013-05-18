@@ -20,29 +20,23 @@
 package com.jomp16.say;
 
 import com.jomp16.pircbotx.Main;
-import com.jomp16.pircbotx.language.LanguageManager;
+import com.jomp16.pircbotx.plugin.Help;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Say extends ListenerAdapter {
-    private String prefix = Main.getPrefix();
-    private LanguageManager languageManager;
+public class SayPlugin extends ListenerAdapter implements Help {
+    private Vars vars;
+    private HashMap<String, String> help = new HashMap<>();
 
-    public Say() throws IOException {
-        String fileNameToFormat = "/lang/%s_%s.lang",
-                fileNameFormatted = String.format(fileNameToFormat, System.getProperty("user.language"), System.getProperty("user.country")),
-                jarPath = URLDecoder.decode(this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8");
-
-        URL url = new URL("jar:file:" + jarPath + "!" + fileNameFormatted);
-        languageManager = new LanguageManager(url);
+    public SayPlugin() throws Exception {
+        vars = new Vars();
+        help.put("say", vars.getLanguageManager().getString("Help", vars.getPrefix()));
     }
 
     @Override
@@ -61,18 +55,24 @@ public class Say extends ListenerAdapter {
                 args.add(matcher.group());
             }
         }
-
-        if (args.get(0).toLowerCase().equals(prefix + "say")) {
-            if (args.size() >= 3) {
-                String channel = args.get(1);
-                String message = args.get(2);
-                event.getBot().sendIRC().message(channel, message);
-                event.respond(languageManager.getString("MessageSended"));
-            } else {
-                event.respond(languageManager.getString("CommandSyntax", prefix));
+        if (args.get(0).toLowerCase().equals(vars.getPrefix() + "say")) {
+            if (event.getUser().getLogin().length() == 0) {
+                event.getChannel().send().who();
             }
+            if (Main.getOPs().contains((event.getUser().getLogin() + "@" + event.getUser().getHostmask()).substring(1))) {
+                if (args.size() >= 3) {
+                    String channel = args.get(1);
+                    String message = args.get(2);
+                    event.getBot().sendIRC().message(channel, message);
+                    event.respond(vars.getLanguageManager().getString("MessageSended"));
+                } else {
+                    event.respond(vars.getLanguageManager().getString("CommandSyntax", vars.getPrefix()));
+                }
+            } else {
+                event.respond(vars.getLanguageManager().getString("NoPerm"));
+            }
+            args.clear();
         }
-        args.clear();
     }
 
     @Override
@@ -91,17 +91,25 @@ public class Say extends ListenerAdapter {
                 args.add(matcher.group());
             }
         }
-
-        if (args.get(0).toLowerCase().equals(prefix + "say")) {
-            if (args.size() >= 3) {
-                String channel = args.get(1);
-                String message = args.get(2);
-                event.getBot().sendIRC().message(channel, message);
-                event.respond(languageManager.getString("MessageSended"));
+        if (args.get(0).toLowerCase().equals(vars.getPrefix() + "say")) {
+            if (Main.getOPs().contains((event.getUser().getLogin() + "@" + event.getUser().getHostmask()).substring(1))) {
+                if (args.size() >= 3) {
+                    String channel = args.get(1);
+                    String message = args.get(2);
+                    event.getBot().sendIRC().message(channel, message);
+                    event.respond(vars.getLanguageManager().getString("MessageSended"));
+                } else {
+                    event.respond(vars.getLanguageManager().getString("CommandSyntax", vars.getPrefix()));
+                }
             } else {
-                event.respond(languageManager.getString("CommandSyntax", prefix));
+                event.respond(vars.getLanguageManager().getString("NoPerm"));
             }
+            args.clear();
         }
-        args.clear();
+    }
+
+    @Override
+    public HashMap<String, String> getHelp() {
+        return help;
     }
 }

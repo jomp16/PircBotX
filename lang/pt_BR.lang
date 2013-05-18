@@ -22,12 +22,12 @@
 ##########
 
 Welcome=Bem vindo ao PircBotX por jomp16!
-LoadingSQLiteDatabase=Carregando o banco de dados SQLite
+LoadingSQLiteDatabase=Carregando o banco de dados SQLite...
 SQLiteLoaded=O banco de dados SQLite foi carregado!
 SQLiteNotFound=O banco de dados SQLite não foi encontrado! Abrindo o assistente de configuração para você criar uma!
-LoadingPlugins=Carregando plugins
-LoadedPlugins=Carregado %d plugins!
-LoadingBot=Carregando bot
+LoadingPlugins=Carregando plugins...
+LoadedPlugins=Carregado %d plugins e %d comandos do console!
+LoadingBot=Carregando bot...
 LoadedBot=Bot carregado!
 
 ConfirmChar=s
@@ -50,3 +50,12 @@ SQLiteStep6=Qual será o host que o bot conectará?
 SQLiteStep7-1=Quais são os canais que você quer que o bot faça o join automaticamente? (Sintaxe: #canal)
 SQLiteStep7-2=Gostaria de adicionar mais um canal para entrar? [s/N]
 SQLiteFinished=Parabéns!
+
+##########
+## Help ##
+##########
+
+AvailableHelp=Ajudas disponíveis para os seguintes comandos: %s
+Help=Ajuda do plugin: %s: %s
+HelpSyntax=Sintaxe: %shelp "plugin" para mostrar uma ajuda do plugin ou help all para mostrar todas as ajudas disponíveis
+HelpNoResult=Nenhuma ajuda encontrada para esse plugin =(
