@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "MismatchedQueryAndUpdateOfCollection"})
 public class Main {
     @Getter
     private static LanguageManager languageManager;
@@ -163,7 +163,6 @@ public class Main {
 
     private static void doCommandsPlugins() throws Exception {
         while (true) {
-            // TODO
             ArrayList<String> args1 = new ArrayList<>();
             logging.write("--> ", false);
             Matcher matcher = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'").matcher((CharSequence) logging.getInputString());
